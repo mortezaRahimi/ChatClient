@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                     msgFromServer = msgFromServer + "\n" + message.readText()
 
 //                    if (!(message.readText() as String).contains(msgSent))
-
+                    if (!(message.readText() as String).contains("You are connected"))
                         notifUser.showNotif(this@MainActivity, message.readText())
                 }
             }
@@ -130,12 +130,12 @@ fun GreetingView(
 
         Button(
             onClick = {
-                if(messageToSend.isNotEmpty())
-                CoroutineScope(Dispatchers.Main).launch {
-                    actionSend.get().send(messageToSend)
-                    saveMsg(messageToSend)
-                    messageToSend = ""
-                }
+                if (messageToSend.isNotEmpty())
+                    CoroutineScope(Dispatchers.Main).launch {
+                        actionSend.get().send(messageToSend)
+                        saveMsg(messageToSend)
+                        messageToSend = ""
+                    }
             },
             modifier = Modifier.fillMaxWidth()
         ) {
